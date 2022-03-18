@@ -1,5 +1,4 @@
-//https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-const getRandomIntInc = (min, max) => {
+const getRandomNumber = (min, max) => {
   if (min < 0 || max < 0) {
     return -1;
   }
@@ -10,10 +9,41 @@ const getRandomIntInc = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-getRandomIntInc(-5, -1);
+const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-//имя_функции(проверяемая_строка, максимальная_длина);
-const checkMaxLength = (checkingString, maxLength) => checkingString.length <= maxLength;
+const message = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
 
-checkMaxLength('Пумпурум', 45);
+const names = [
+  'Иван',
+  'Мария',
+  'Виктор',
+  'Юлия',
+];
 
+const getComment = () => ({
+  id: getRandomNumber(1, 6),
+  avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+  message: getRandomArrayElement(message),
+  name: getRandomArrayElement(names),
+});
+
+const createItems = (index) => ({
+  id: index,
+  url: `photo/${index}.jpg`,
+  description: `Описание № ${index}`,
+  likes: getRandomNumber(15, 200),
+  comments: getComment(),
+});
+
+const items = [];
+
+for (let i = 0; i < 25; i++) {
+  items[i] = createItems(i + 1);
+}
