@@ -25,7 +25,7 @@ const getComment = () => ({
 
 const createItems = (index) => ({
   id: index,
-  url: `photo/${index}.jpg`,
+  url: `photos/${index}.jpg`,
   description: `Описание № ${index}`,
   likes: getRandomNumber(15, 200),
   comments: Array.from({length: getRandomNumber(0, 3)}, getComment),
