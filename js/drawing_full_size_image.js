@@ -4,11 +4,11 @@ const body = document.querySelector('body');
 const openFullSizeImage = (item) => {
   bigPicture.classList.remove('hidden');
 
-  const picture = document.querySelector('.big-picture__img');
+  const picture = document.querySelector('.big-picture__img img');
 
   picture.setAttribute('src', item.url);
 
-  const likesCount = document.querySelector('likes-count');
+  const likesCount = document.querySelector('.likes-count');
 
   likesCount.textContent = item.likes;
 
