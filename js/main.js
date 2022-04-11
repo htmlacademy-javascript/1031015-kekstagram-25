@@ -1,6 +1,6 @@
-import { items } from './data.js';
-import { renderMiniatures } from './rendering_miniatures.js';
-import { openFullSizeImage, closeFullSizeImage } from './drawing_full_size_image';
+import { items } from '../js/data.js';
+import { renderMiniatures } from '../js/rendering_miniatures';
+import { openFullSizeImage, closeFullSizeImage } from '../js/drawing_full_size_image';
 // console.log(JSON.stringify(items, null, 4));
 
 renderMiniatures(items);
