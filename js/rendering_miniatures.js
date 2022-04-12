@@ -14,8 +14,7 @@ const renderMiniatures = (items) => {
     const likes = element.querySelector('.picture__likes');
     const itemComments = item.comments;
 
-    image.setAttribute('src', item.url);
-    element.setAttribute('data-id', item.id);
+    image.src = item.url;
 
     comments.textContent= itemComments.length;
 

@@ -6,7 +6,7 @@ const openFullSizeImage = (item) => {
 
   const picture = document.querySelector('.big-picture__img img');
 
-  picture.setAttribute('src', item.url);
+  picture.src = item.url;
 
   const likesCount = document.querySelector('.likes-count');
 
@@ -32,10 +32,10 @@ const openFullSizeImage = (item) => {
     const image = document.createElement('img');
 
     image.classList.add('social__picture');
-    image.setAttribute('src', comment.avatar);
-    image.setAttribute('alt', comment.name);
-    image.setAttribute('width', '35');
-    image.setAttribute('height', '35');
+    image.src = comment.avatar;
+    image.alt = comment.name;
+    image.width = '35';
+    image.height = '35';
 
     element.appendChild(image);
 
