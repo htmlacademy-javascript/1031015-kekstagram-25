@@ -1,5 +1,16 @@
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
+const closeImageButton = document.querySelector('.big-picture__cancel');
+
+const closeFullSizeImage = ({ key }) => {
+  if (!key || key === 'Escape') {
+    bigPicture.classList.add('hidden');
+    body.classList.remove('hidden');
+
+    closeImageButton.removeEventListener('click', closeFullSizeImage);
+    document.removeEventListener('keydown', closeFullSizeImage);
+  }
+};
 
 const openFullSizeImage = (item) => {
   bigPicture.classList.remove('hidden');
@@ -57,11 +68,9 @@ const openFullSizeImage = (item) => {
   commentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
 
-};
+  closeImageButton.addEventListener('click', closeFullSizeImage);
 
-const closeFullSizeImage = () => {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('hidden');
+  document.addEventListener('keydown', closeFullSizeImage);
 };
 
 export {
