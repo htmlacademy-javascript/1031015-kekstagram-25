@@ -28,7 +28,7 @@ const createItems = (index) => ({
   url: `photos/${index}.jpg`,
   description: `Описание № ${index}`,
   likes: getRandomNumber(15, 200),
-  comments: Array.from({length: getRandomNumber(0, 3)}, getComment),
+  comments: Array.from({length: getRandomNumber(0, 25)}, getComment),
 });
 
 const items = [];
