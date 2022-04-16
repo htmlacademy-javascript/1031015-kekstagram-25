@@ -1,14 +1,25 @@
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
+const closeImageButton = document.querySelector('.big-picture__cancel');
+
+const closeFullSizeImage = ({ key }) => {
+  if (!key || key === 'Escape') {
+    bigPicture.classList.add('hidden');
+    body.classList.remove('hidden');
+
+    closeImageButton.removeEventListener('click', closeFullSizeImage);
+    document.removeEventListener('keydown', closeFullSizeImage);
+  }
+};
 
 const openFullSizeImage = (item) => {
   bigPicture.classList.remove('hidden');
 
-  const picture = document.querySelector('.big-picture__img');
+  const picture = document.querySelector('.big-picture__img img');
 
-  picture.setAttribute('src', item.url);
+  picture.src = item.url;
 
-  const likesCount = document.querySelector('likes-count');
+  const likesCount = document.querySelector('.likes-count');
 
   likesCount.textContent = item.likes;
 
@@ -32,10 +43,10 @@ const openFullSizeImage = (item) => {
     const image = document.createElement('img');
 
     image.classList.add('social__picture');
-    image.setAttribute('src', comment.avatar);
-    image.setAttribute('alt', comment.name);
-    image.setAttribute('width', '35');
-    image.setAttribute('height', '35');
+    image.src = comment.avatar;
+    image.alt = comment.name;
+    image.width = '35';
+    image.height = '35';
 
     element.appendChild(image);
 
@@ -57,11 +68,9 @@ const openFullSizeImage = (item) => {
   commentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
 
-};
+  closeImageButton.addEventListener('click', closeFullSizeImage);
 
-const closeFullSizeImage = () => {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('hidden');
+  document.addEventListener('keydown', closeFullSizeImage);
 };
 
 export {

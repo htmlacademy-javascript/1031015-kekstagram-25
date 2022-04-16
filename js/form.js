@@ -1,4 +1,4 @@
-import { isEscapeKey, isInputFocus } from '../js/util';
+import { isEscapeKey, isInputFocus } from '/js/util.js';
 
 const imgUploadStart = document.querySelector('.img-upload__label');
 const imgUpload = document.querySelector('.img-upload__overlay');
