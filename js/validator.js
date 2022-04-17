@@ -9,7 +9,7 @@ pristine.addValidator(hashtagField, (value) => {
     return true;
   }
 
-  const hashtags = value.split(' ');
+  const hashtags = value.split(/\s+/);
   const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
   let isValid = true;
 
