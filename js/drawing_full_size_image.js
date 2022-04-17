@@ -1,6 +1,10 @@
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const closeImageButton = document.querySelector('.big-picture__cancel');
+const socialComments = document.querySelector('.social__comments');
+const socialCommentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
+let itemComments = [];
 let commentsOffset = 0;
 const commentsLimit = 5;
 
@@ -40,11 +44,19 @@ const generateComment = (comment) => {
   return element;
 };
 
-const createCommentsFragment = (comments) => {
+const updateCommentsCount = () => {
+  const max = commentsOffset + commentsLimit;
+  console.log(max)
+  const currentCount = itemComments.length < max ? itemComments.length : max;
+
+  socialCommentCount.textContent = `${currentCount} из ${itemComments.length} комментариев`;
+};
+
+const loadComments = () => {
   const fragment = document.createDocumentFragment();
 
   for (let i = commentsOffset; i < commentsOffset + commentsLimit; i++) {
-    const comment = comments[i];
+    const comment = itemComments[i];
 
     if (comment !== undefined) {
       const commentElement = generateComment(comment);
@@ -52,6 +64,16 @@ const createCommentsFragment = (comments) => {
       fragment.appendChild(commentElement);
     }
   }
+
+  if (itemComments.length > commentsOffset + commentsLimit) {
+    commentsLoader.classList.remove('hidden');
+  } else {
+    commentsLoader.classList.add('hidden');
+  }
+
+  socialComments.appendChild(fragment);
+
+  updateCommentsCount();
 
   commentsOffset += commentsLimit;
 
@@ -69,49 +91,23 @@ const openFullSizeImage = (item) => {
 
   likesCount.textContent = item.likes;
 
-  const commentsCount = document.querySelector('.comments-count');
-
-  commentsCount.textContent = item.comments.length;
-
   const socialCaption = document.querySelector('.social__caption');
 
   socialCaption.textContent = item.description;
-
-  const socialComments = document.querySelector('.social__comments');
 
   socialComments.innerHTML = '';
 
   commentsOffset = 0;
 
-  const commentsFragment = createCommentsFragment(item.comments);
+  itemComments = item.comments;
 
-  socialComments.appendChild(commentsFragment);
+  loadComments();
 
-  const socialCommentCount = document.querySelector('.social__comment-count');
-  const commentsLoader = document.querySelector('.comments-loader');
-
-  if (item.comments.length > commentsLimit) {
-    commentsLoader.classList.remove('hidden');
-  } else {
-    commentsLoader.classList.add('hidden');
-  }
-
-  socialCommentCount.classList.remove('hidden');
   body.classList.add('modal-open');
 
   closeImageButton.addEventListener('click', closeFullSizeImage);
 
-  commentsLoader.addEventListener('click', () => {
-    const newCommentsFragment = createCommentsFragment(item.comments);
-
-    socialComments.appendChild(newCommentsFragment);
-
-    if (item.comments.length > commentsOffset + commentsLimit) {
-      commentsLoader.classList.remove('hidden');
-    } else {
-      commentsLoader.classList.add('hidden');
-    }
-  });
+  commentsLoader.addEventListener('click', loadComments);
 
   document.addEventListener('keydown', closeFullSizeImage);
 };
