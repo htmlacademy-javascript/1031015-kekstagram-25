@@ -46,7 +46,6 @@ const generateComment = (comment) => {
 
 const updateCommentsCount = () => {
   const max = commentsOffset + commentsLimit;
-  console.log(max)
   const currentCount = itemComments.length < max ? itemComments.length : max;
 
   socialCommentCount.textContent = `${currentCount} из ${itemComments.length} комментариев`;
