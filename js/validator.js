@@ -1,6 +1,7 @@
 const form = document.querySelector('.img-upload__form');
 const pristine = new Pristine(form);
 const hashtagField = document.querySelector('.text__hashtags');
+const numberOfHashtags = 5;
 
 pristine.addValidator(hashtagField, (value) => {
   value = value.trim();
@@ -21,7 +22,7 @@ pristine.addValidator(hashtagField, (value) => {
     }
   });
 
-  if (hashtagsList.length > 5) {
+  if (hashtagsList.length > numberOfHashtags) {
     isValid = false;
   }
 
