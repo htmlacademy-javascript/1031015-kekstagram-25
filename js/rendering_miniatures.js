@@ -1,4 +1,4 @@
-import { openFullSizeImage } from './drawing_full_size_image.js';
+import { openFullSizeImage } from '/js/drawing_full_size_image.js';
 
 const renderMiniatures = (items) => {
   const templateFragment = document.querySelector('#picture').content; //Находим элемент с содержимом темплейта

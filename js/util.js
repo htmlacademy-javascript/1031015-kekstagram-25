@@ -11,7 +11,12 @@ const getRandomNumber = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isInputFocus = (element) => element === document.activeElement;
+
 export {
   getRandomNumber,
   getRandomArrayElement,
+  isEscapeKey,
+  isInputFocus
 };
