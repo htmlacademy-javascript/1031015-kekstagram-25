@@ -48,3 +48,38 @@ form.addEventListener('submit', (event)=> {
     event.preventDefault();
   }
 });
+
+const  minusButton = document.querySelector('.scale__control--smaller');
+const plusButton = document.querySelector('.scale__control--bigger');
+const scaleValue = document.querySelector('.scale__control--value');
+const scale = {
+  min: 25,
+  max: 100,
+  step: 25,
+};
+
+const changeSize = (digit) => {
+  let newValue = parseInt(scaleValue.value, 10)+ scale.step * digit;
+
+  if (newValue < scale.min) {
+    newValue = scale.min;
+  }
+  if (newValue > scale.max) {
+    newValue = scale.max;
+  }
+
+  scaleValue.value = `${newValue}%`;
+  imgPreview.style.transform = `scale(${newValue / 100})`;
+};
+
+
+const onMinusButtonClick = () => {
+  changeSize(-1);
+};
+
+const onPlusButtonClick = () => {
+  changeSize(1);
+};
+
+minusButton.addEventListener('click', onMinusButtonClick);
+plusButton.addEventListener('click', onPlusButtonClick);
